@@ -1,11 +1,13 @@
-## colon genislendirmeyi ayarla
-
 ## pinia configure et
 
-## template leri yaz
+- pinia ile modu dinamik yap
+
+## template
+
+- homeview sayfasını yaz
+- v-dialog ile add event formu olustur
 
 ## firebase uygulaması olustur.
-
 ## rest api ile bağla
 
 

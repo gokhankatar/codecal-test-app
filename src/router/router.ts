@@ -44,4 +44,9 @@ const router = createRouter({
     routes,
 });
 
+router.beforeEach((to, from, next) => {
+    document.title = 'CodeCal | ' + to.meta.title;
+    next();
+})
+
 export default router;
