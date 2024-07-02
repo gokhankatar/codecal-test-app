@@ -8,11 +8,17 @@
     >
       <div class="logo d-flex flex-column justify-center align-center ga-2">
         <v-img :src="item.img_src" width="60" />
-        <span class="text-light-blue-darken-3">{{ item.lang }}</span>
+        <span
+          :style="{ color: _store.isActive === 'front-end' ? '#0C7CC0' : '#D84315' }"
+          >{{ item.lang }}</span
+        >
       </div>
 
       <div class="activity d-flex flex-column justify-center align-center ga-2">
-        <span class="date text-light-blue-darken-1">{{ item.date }}</span>
+        <span
+          :style="{ color: _store.isActive === 'front-end' ? '#039BE5' : '#FB8C00' }"
+          >{{ item.date }}</span
+        >
         <span class="text-h5 text-sm-h4">{{ item.activitiy }}</span>
       </div>
 
@@ -87,4 +93,8 @@ onMounted(() => {
   isLoading.value = false;
 });
 </script>
-<style scoped></style>
+<style scoped>
+#card:hover span {
+  text-decoration: underline;
+}
+</style>
