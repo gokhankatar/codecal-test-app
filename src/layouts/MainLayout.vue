@@ -13,10 +13,10 @@
         >Ranking</v-list-item
       >
       <v-list-item class="d-none d-sm-flex list-item cursor-pointer rounded-xl"
-        >Highlights</v-list-item
+        >Vote</v-list-item
       >
       <v-list-item class="d-none d-sm-flex list-item cursor-pointer rounded-xl"
-        >News</v-list-item
+        >Logout</v-list-item
       >
       <v-btn
         id="btn"
@@ -36,10 +36,10 @@
         class="position-relative w-100 mt-15 mx-auto d-flex justify-center align-center"
       >
         <span
-          @click="isActive = 'front-end'"
+          @click="_store.changeIsActive"
           :style="{
-            backgroundColor: isActive === 'front-end' ? '#0277bd' : 'transparent',
-            color: isActive === 'front-end' ? '#fff' : '#37474F',
+            backgroundColor: _store.isActive === 'front-end' ? '#0277bd' : 'transparent',
+            color: _store.isActive === 'front-end' ? '#fff' : '#37474F',
           }"
           class="cursor-pointer pa-3 text-subtitle-1 text-sm-h5"
           style="
@@ -51,10 +51,10 @@
         >
         <v-icon class="position-absolute" color="#37474F" icon="mdi-sync"></v-icon>
         <span
-          @click="isActive = 'back-end'"
+          @click="_store.changeIsActive"
           :style="{
-            backgroundColor: isActive === 'back-end' ? '#D84315' : 'transparent',
-            color: isActive === 'back-end' ? '#fff' : '#37474F',
+            backgroundColor: _store.isActive === 'back-end' ? '#D84315' : 'transparent',
+            color: _store.isActive === 'back-end' ? '#fff' : '#37474F',
           }"
           class="cursor-pointer pa-3 text-subtitle-1 text-sm-h5"
           style="
@@ -67,6 +67,8 @@
       </div>
     </v-row>
 
+    <v-divider></v-divider>
+
     <v-row class="pa-5">
       <v-col cols="12" sm="6" md="3">
         <v-card
@@ -77,7 +79,7 @@
           <div class="d-flex justify-center align-center ga-2">
             <v-img
               :src="
-                isActive === 'front-end'
+                _store.isActive === 'front-end'
                   ? 'https://seekvectors.com/files/download/vue-9-01.png'
                   : 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/590px-Node.js_logo.svg.png'
               "
@@ -86,12 +88,12 @@
             />
             <span
               class="text-subtitle-1 text-md-5"
-              :style="{ color: isActive === 'front-end' ? '#0277bd' : '#D84315' }"
+              :style="{ color: _store.isActive === 'front-end' ? '#0277bd' : '#D84315' }"
               >20 Sep 2024</span
             >
           </div>
           <span class="text-h5 text-md-h4">{{
-            isActive === "front-end" ? "Panel Challenge" : "Authentication Page"
+            _store.isActive === "front-end" ? "Panel Challenge" : "Authentication Page"
           }}</span>
           <span class="text-subtitle-1">+78 views | +4 votes</span>
         </v-card>
@@ -106,7 +108,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-                isActive === 'front-end'
+              _store.isActive === 'front-end'
                   ? 'https://cdn1.iconfinder.com/data/icons/programing-development-8/24/react_logo-512.png'
                   : 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sql_data_base_with_logo.png/640px-Sql_data_base_with_logo.png'
               "
@@ -115,12 +117,12 @@
             />
             <span
               class="text-subtitle-1 text-md-5"
-              :style="{ color: isActive === 'front-end' ? '#0277bd' : '#D84315' }"
+              :style="{ color: _store.isActive === 'front-end' ? '#0277bd' : '#D84315' }"
               >20 Sep 2024</span
             >
           </div>
           <span class="text-h5 text-md-h4">{{
-            isActive === "front-end" ? "Dashboard Space" : "Database Build"
+            _store.isActive === "front-end" ? "Dashboard Space" : "Database Build"
           }}</span>
           <span class="text-subtitle-1">+78 views | +4 votes</span>
         </v-card>
@@ -135,7 +137,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-                isActive === 'front-end'
+              _store.isActive === 'front-end'
                   ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png'
                   : 'https://i.pinimg.com/originals/92/60/dd/9260dd459aa4566cfa25e86a3f10ea1b.png'
               "
@@ -144,12 +146,12 @@
             />
             <span
               class="text-subtitle-1 text-md-5"
-              :style="{ color: isActive === 'front-end' ? '#0277bd' : '#D84315' }"
+              :style="{ color: _store.isActive === 'front-end' ? '#0277bd' : '#D84315' }"
               >25 Sep 2024</span
             >
           </div>
           <span class="text-h5 text-md-h4">{{
-            isActive === "front-end" ? "Todo Challenge" : "AI Algorthym"
+            _store.isActive === "front-end" ? "Todo Challenge" : "AI Algorthym"
           }}</span>
           <span class="text-subtitle-1">+78 views | +4 votes</span>
         </v-card>
@@ -164,7 +166,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-                isActive === 'front-end'
+              _store.isActive === 'front-end'
                   ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Svelte_logo_by_gengns.svg/640px-Svelte_logo_by_gengns.svg.png'
                   : 'https://download.logo.wine/logo/C%2B%2B/C%2B%2B-Logo.wine.png'
               "
@@ -173,17 +175,19 @@
             />
             <span
               class="text-subtitle-1 text-md-5"
-              :style="{ color: isActive === 'front-end' ? '#0277bd' : '#D84315' }"
+              :style="{ color: _store.isActive === 'front-end' ? '#0277bd' : '#D84315' }"
               >25 Sep 2024</span
             >
           </div>
           <span class="text-h5 text-md-h4">{{
-            isActive === "front-end" ? "Login Platform" : "Sensor Algorthym"
+            _store.isActive === "front-end" ? "Login Platform" : "Sensor Algorthym"
           }}</span>
           <span class="text-subtitle-1">+78 views | +4 votes</span>
         </v-card>
       </v-col>
     </v-row>
+
+    <v-divider></v-divider>
 
     <v-row class="pa-5 my-10">
       <slot />
@@ -191,9 +195,9 @@
   </v-container>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import store from "../store/pinia";
 
-const isActive = ref("front-end");
+const _store = store();
 </script>
 <style scoped>
 #btn {
