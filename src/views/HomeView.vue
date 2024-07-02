@@ -7,7 +7,7 @@
       height="600"
     >
       <div class="logo d-flex flex-column justify-center align-center ga-2">
-        <v-img :src="item.img_src" width="60" />
+        <v-img :src="item.img_src" width="60" height="60"/>
         <span
           :style="{ color: _store.isActive === 'front-end' ? '#0C7CC0' : '#D84315' }"
           >{{ item.lang }}</span
