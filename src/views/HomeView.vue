@@ -7,7 +7,7 @@
       height="600"
     >
       <div class="logo d-flex flex-column justify-center align-center ga-2">
-        <v-img :src="item.img_src" width="60" height="60"/>
+        <v-img :src="item.img_src" width="60" height="60" />
         <span
           :style="{ color: _store.isActive === 'front-end' ? '#0C7CC0' : '#D84315' }"
           >{{ item.lang }}</span
@@ -23,11 +23,23 @@
       </div>
 
       <div class="buttons d-flex justify-center align-center ga-2">
-        <v-btn class="bg-light-blue-darken-3 border-none" rounded="xl" size="large"
-          >edit</v-btn
+        <v-btn
+          :style="{
+            backgroundColor: _store.isActive === 'front-end' ? '#0277BD' : '#D84315',
+          }"
+          class="border-none"
+          rounded="xl"
+          size="large"
+          >join</v-btn
         >
-        <v-btn class="bg-red-lighten-1 border-none" rounded="xl" size="large"
-          >delete</v-btn
+        <v-btn
+          :style="{
+            backgroundColor: _store.isActive === 'front-end' ? '#0277BD' : '#D84315',
+          }"
+          class="border-none"
+          rounded="xl"
+          size="large"
+          >map</v-btn
         >
       </div>
 
@@ -37,9 +49,16 @@
       </div>
       <v-divider></v-divider>
 
-      <div class="vote-btn d-flex justify-space-between align-center">
-        <v-btn prepend-icon="mdi-thumb-up-outline">Good</v-btn>
-        <v-btn prepend-icon="mdi-thumb-down-outline">Bad</v-btn>
+      <div
+        class="vote-btn d-flex justify-space-between align-center"
+        v-if="isVote === false"
+      >
+        <v-btn @click="sendVote(item)" prepend-icon="mdi-thumb-up-outline">Good</v-btn>
+        <v-btn @click="sendVote(item)" prepend-icon="mdi-thumb-down-outline">Bad</v-btn>
+      </div>
+
+      <div v-if="isVote">
+        <p class="pa-3 mt-2 bg-green">Thanks for your vote!</p>
       </div>
 
       <div class="added-date mt-10">
@@ -51,10 +70,13 @@
   <!-- loading bar -->
   <Loading v-if="isLoading" />
 </template>
+
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import store from "../store/pinia";
 import Loading from "../components/Loading.vue";
+
+const isVote = ref(false);
 
 interface ProjectItem {
   img_src: string;
@@ -69,6 +91,14 @@ interface ProjectItem {
 const _store = store();
 const isLoading = ref(false);
 const arr = ref<ProjectItem[]>([]);
+
+const sendVote = (item: any) => {
+  item.vote++;
+  isVote.value = true;
+  setTimeout(() => {
+    isVote.value = false;
+  }, 2000);
+};
 
 watch(
   () => _store.isActive,

@@ -9,23 +9,21 @@
     </div>
     <v-spacer></v-spacer>
     <v-list class="d-flex align-center ga-2 bg-transparent">
-      <v-list-item class="d-none d-sm-flex list-item cursor-pointer rounded-xl"
-        >Ranking</v-list-item
+      <v-list-item class="d-none d-sm-flex list-item item-login cursor-pointer rounded-xl"
+        >Login</v-list-item
       >
-      <v-list-item class="d-none d-sm-flex list-item cursor-pointer rounded-xl"
-        >Vote</v-list-item
-      >
-      <v-list-item class="d-none d-sm-flex list-item cursor-pointer rounded-xl"
+      <v-list-item class="d-none d-sm-flex list-item item-logout cursor-pointer rounded-xl"
         >Logout</v-list-item
       >
       <v-btn
+        @click="seeCodes"
         id="btn"
         class="bg-light-blue-darken-3"
         style="border-color: #0277bd"
         variant="outlined"
         rounded="xl"
-        prepend-icon="mdi-plus"
-        >Add Event</v-btn
+        prepend-icon="mdi-code-brackets"
+        >See Codes</v-btn
       >
     </v-list>
   </v-app-bar>
@@ -108,7 +106,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-              _store.isActive === 'front-end'
+                _store.isActive === 'front-end'
                   ? 'https://cdn1.iconfinder.com/data/icons/programing-development-8/24/react_logo-512.png'
                   : 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sql_data_base_with_logo.png/640px-Sql_data_base_with_logo.png'
               "
@@ -137,7 +135,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-              _store.isActive === 'front-end'
+                _store.isActive === 'front-end'
                   ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png'
                   : 'https://i.pinimg.com/originals/92/60/dd/9260dd459aa4566cfa25e86a3f10ea1b.png'
               "
@@ -166,7 +164,7 @@
           <div class="d-flex justify-center align-center ga-1">
             <v-img
               :src="
-              _store.isActive === 'front-end'
+                _store.isActive === 'front-end'
                   ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Svelte_logo_by_gengns.svg/640px-Svelte_logo_by_gengns.svg.png'
                   : 'https://download.logo.wine/logo/C%2B%2B/C%2B%2B-Logo.wine.png'
               "
@@ -194,11 +192,18 @@
     </v-row>
   </v-container>
 </template>
+
 <script setup lang="ts">
 import store from "../store/pinia";
 
 const _store = store();
+
+const seeCodes = (): void => {
+  let url = "https://github.com/gokhankatar/firebase-test-app";
+  window.open(url, "_blank");
+};
 </script>
+
 <style scoped>
 #btn {
   transition: all 0.2s ease;
@@ -209,10 +214,13 @@ const _store = store();
 .list-item {
   transition: all 0.2s ease;
 }
-.list-item:hover {
-  background-color: #0277bd;
+.item-login:hover {
+  background-color: green;
 }
 
+.item-logout:hover {
+  background-color: red;
+}
 #card:hover span {
   text-decoration: underline;
 }

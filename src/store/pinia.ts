@@ -167,9 +167,6 @@ const store = defineStore('piniaStore', {
             ]
         }
     },
-    getters: {
-
-    },
     actions: {
         changeIsActive() {
             this.isActive === 'front-end'
