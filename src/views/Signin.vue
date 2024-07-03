@@ -41,14 +41,25 @@
       Don't have an account? Sign up now!
     </a>
   </v-form>
+
+  <!-- toast -->
+  <v-snackbar v-model="isErr" color="red">
+    <span class="d-flex justify-center align-center"
+      >Your email or password is wrong! Try again.</span
+    >
+  </v-snackbar>
 </template>
 
 <script setup lang="ts">
+import axios from "axios";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+const api_key: string = import.meta.env.VITE_API_KEY;
+
+const isErr = ref(false);
 const formRef = ref(null);
 const models = ref({
   email: "",
@@ -71,19 +82,37 @@ const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-const onLogin = () => {
-  console.log("login");
-  //  todo
+const onLogin = async () => {
+  try {
+    const res = await axios.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${api_key}`,
+      {
+        email: models.value.email,
+        password: models.value.password,
+        returnSecureToken: true,
+      }
+    );
+
+    if (res.status === 200) {
+      router.replace("/");
+    } 
+  } catch (error) {
+    isErr.value = true;
+    setTimeout(() => {
+      isErr.value = false;
+    }, 2000);
+    console.error(error);
+  }
 };
 
 const validate = async () => {
   const { valid } = await formRef.value.validate();
   if (valid) {
     onLogin();
-    router.replace("/");
   }
 };
 </script>
+
 <style scoped>
 #form {
   border: none;

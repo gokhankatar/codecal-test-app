@@ -52,14 +52,28 @@
       Already have an account? Login.
     </a>
   </v-form>
+
+  <!-- toast -->
+  <v-snackbar v-model="isRegister" color="green">
+    <span class="d-flex justify-center align-center">Welcome to CodeCal !</span>
+  </v-snackbar>
+
+  <v-snackbar v-model="isErr" color="red">
+    <span class="d-flex justify-center align-center"
+      >Registration failed. There may already be such a user.</span
+    >
+  </v-snackbar>
 </template>
 
 <script setup lang="ts">
+import axios from "axios";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+const isErr = ref(false);
+const isRegister = ref(false);
 const formRef = ref(null);
 const models = ref({
   fullName: "",
@@ -87,16 +101,38 @@ const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-const onRegister = () => {
-  // todo
-  console.log("onRegister");
+const api_key = import.meta.env.VITE_API_KEY;
+
+const onRegister = async () => {
+  try {
+    await axios
+      .post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${api_key}`, {
+        email: models.value.email,
+        password: models.value.password,
+        returnSecureToken: true,
+      })
+      .then((res) => {
+        if ((res.status = 200)) {
+          isRegister.value = true;
+          setTimeout(() => {
+            isRegister.value = false;
+            router.replace("/signin");
+          }, 2000);
+        }
+      });
+  } catch (error) {
+    isErr.value = true;
+    setTimeout(() => {
+      isErr.value = false;
+    }, 2000);
+    console.error(error);
+  }
 };
 
 const validate = async () => {
   const { valid } = await formRef.value.validate();
   if (valid) {
     onRegister();
-    router.replace("/signin");
   }
 };
 </script>

@@ -47,6 +47,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = 'CodeCal | ' + to.meta.title;
     next();
-})
+});
+
+
+// todo
+// router.beforeEach((to, from, next) => {
+//     if (to.meta.public || store.getters.getUserInfo.idToken) {
+//         next();
+//     } else {
+//         next('/signin');
+//     }
+// });
 
 export default router;
