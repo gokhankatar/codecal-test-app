@@ -1,5 +1,13 @@
-## kullanici bilgilerini store a at ve router guard yaz
-## otomatik logout yap
-## logout a basınca cıkıs
+## CodeCal
+<img src="src/screenshots/general.png" />
 
+## Technologies
 
+- TypeScript
+- Vue
+- Vite
+- Vue Router
+- Pinia
+- Firebase
+- Axios
+- Rest API

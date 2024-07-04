@@ -49,14 +49,4 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-
-// todo
-// router.beforeEach((to, from, next) => {
-//     if (to.meta.public || store.getters.getUserInfo.idToken) {
-//         next();
-//     } else {
-//         next('/signin');
-//     }
-// });
-
 export default router;

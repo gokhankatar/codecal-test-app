@@ -9,12 +9,6 @@
     </div>
     <v-spacer></v-spacer>
     <v-list class="d-flex align-center ga-2 bg-transparent">
-      <v-list-item class="d-none d-sm-flex list-item item-login cursor-pointer rounded-xl"
-        >Login</v-list-item
-      >
-      <v-list-item class="d-none d-sm-flex list-item item-logout cursor-pointer rounded-xl"
-        >Logout</v-list-item
-      >
       <v-btn
         @click="seeCodes"
         id="btn"
@@ -210,16 +204,6 @@ const seeCodes = (): void => {
 }
 #btn:hover {
   background-color: transparent !important;
-}
-.list-item {
-  transition: all 0.2s ease;
-}
-.item-login:hover {
-  background-color: green;
-}
-
-.item-logout:hover {
-  background-color: red;
 }
 #card:hover span {
   text-decoration: underline;
