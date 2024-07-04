@@ -5,6 +5,7 @@
 
 - TypeScript
 - Vue
+- Vuetify
 - Vite
 - Vue Router
 - Pinia
